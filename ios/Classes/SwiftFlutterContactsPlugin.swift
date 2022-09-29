@@ -488,8 +488,11 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
                 contactView.delegate = self
                 // https://stackoverflow.com/a/39594589
                 let navigationController = UINavigationController(rootViewController: contactView)
-                self.rootViewController.present(navigationController, animated: true, completion: nil)
-                self.externalResult = result
+                
+                let viewController : UIViewController? = UIApplication.shared.delegate?.window??.rootViewController
+                viewController?.present(navigation, animated:true, completion: nil)
+                //self.rootViewController.present(navigationController, animated: true, completion: nil)
+                //self.externalResult = result
             }
         default:
             result(FlutterMethodNotImplemented)
@@ -515,11 +518,21 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
     }
 
     public func contactViewController(viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        if let result = externalResult {
+        viewController.dismiss(animated: true, completion: nil)
+        if let result = self.result {
+            if let contact = contact {
+                result(contactToDictionary(contact: contact, localizedLabels: localizedLabels))
+            } else {
+                result(SwiftContactsServicePlugin.FORM_OPERATION_CANCELED)
+            }
+            self.result = nil
+        }
+        /*if let result = externalResult {
             result(contact?.identifier)
             externalResult = nil
         }
         viewController.dismiss(animated: true, completion: nil)//_ALL
+        */
     }
 
     @objc func contactViewControllerDidCancel() {
