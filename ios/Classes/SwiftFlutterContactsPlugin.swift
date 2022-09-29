@@ -514,11 +514,12 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
         return nil
     }
 
-    public func contactViewController(_: CNContactViewController, didCompleteWith contact: CNContact?) {
+    public func contactViewController(viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
         if let result = externalResult {
             result(contact?.identifier)
             externalResult = nil
         }
+        viewController.dismiss(animated: true, completion: nil)//_ALL
     }
 
     @objc func contactViewControllerDidCancel() {
