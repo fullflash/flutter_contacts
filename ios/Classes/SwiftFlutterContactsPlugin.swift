@@ -478,13 +478,13 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
             }
         case "openExternalInsert":
             DispatchQueue.main.async {
-                let contactView = CNContactViewController(forNewContact: CNContact())
-                contactView.navigationItem.backBarButtonItem = UIBarButtonItem(
+                let contactView = CNContactViewController(forNewContact: CNMutableContact())
+               /* contactView.navigationItem.backBarButtonItem = UIBarButtonItem(
                     title: "Cancel",
                     style: .plain,
                     target: self,
                     action: #selector(self.contactViewControllerDidCancel)
-                )
+                )*/
                 contactView.delegate = self
                 // https://stackoverflow.com/a/39594589
                 let navigationController = UINavigationController(rootViewController: contactView)
