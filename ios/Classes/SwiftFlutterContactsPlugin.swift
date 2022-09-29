@@ -489,10 +489,8 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
                 // https://stackoverflow.com/a/39594589
                 let navigationController = UINavigationController(rootViewController: contactView)
                 
-                let viewController : UIViewController? = UIApplication.shared.delegate?.window??.rootViewController
-                viewController?.present(navigation, animated:true, completion: nil)
-                //self.rootViewController.present(navigationController, animated: true, completion: nil)
-                //self.externalResult = result
+               self.rootViewController.present(navigationController, animated: true, completion: nil)
+                self.externalResult = result
             }
         default:
             result(FlutterMethodNotImplemented)
