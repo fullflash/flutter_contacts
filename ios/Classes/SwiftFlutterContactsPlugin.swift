@@ -486,6 +486,7 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
                     action: #selector(self.contactViewControllerDidCancel)
                 )*/
                 contactView.delegate = self
+                contactView.allowsEditing = false
                 // https://stackoverflow.com/a/39594589
                 let navigationController = UINavigationController(rootViewController: contactView)
                 
