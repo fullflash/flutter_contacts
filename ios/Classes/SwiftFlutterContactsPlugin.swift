@@ -516,21 +516,12 @@ public class SwiftFlutterContactsPlugin: NSObject, FlutterPlugin, FlutterStreamH
     }
 
     public func contactViewController(viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        viewController.dismiss(animated: true, completion: nil)
-        if let result = self.result {
-            if let contact = contact {
-                result(contactToDictionary(contact: contact, localizedLabels: localizedLabels))
-            } else {
-                result(SwiftContactsServicePlugin.FORM_OPERATION_CANCELED)
-            }
-            self.result = nil
-        }
-        /*if let result = externalResult {
+        if let result = externalResult {
             result(contact?.identifier)
             externalResult = nil
         }
         viewController.dismiss(animated: true, completion: nil)//_ALL
-        */
+        
     }
 
     @objc func contactViewControllerDidCancel() {
